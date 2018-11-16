@@ -15,14 +15,6 @@ const cors = corsMiddleware({
 server.pre(cors.preflight)
 server.use(cors.actual)
 
-
-
-
-
-
-
-
-
 // Middleware
 server.use(restify.plugins.bodyParser());
 
