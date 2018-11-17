@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Link } from 'react-router-dom'
 export default class Customers extends Component {
     state = {
         customers: null
@@ -18,12 +18,16 @@ export default class Customers extends Component {
     return (
       <div>
       
-       {this.state.customers && this.state.customers.map((person, _id) => (
-            <div key={_id}>{person.name} | {person.email} </div> 
+       {this.state.customers && this.state.customers.map((person) => (
+            <Link to={'/customer/' + person._id} key={person._id}><div>{person.name} | {person.email} </div> </Link>
             
         ))
         }
         
+        <br/>
+        <hr/>
+       <h1>Add new Customers</h1>
+       <Link to={'/add'}><button>Add customer</button></Link>
       </div>
     )
   }
