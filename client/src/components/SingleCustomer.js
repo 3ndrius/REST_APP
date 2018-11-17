@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default class SingleCustomer extends Component {
     state = {
-        customer: null
+        customer: ''
     }
     componentDidMount = () => {
         const id = this.props.match.params.id;
@@ -16,14 +16,13 @@ export default class SingleCustomer extends Component {
         )    
     }
   render() {
-
     return (
       <div>
         { this.state.customer && this.state.customer.name }   |      
-        { this.state.customer && this.state.customer.email }    
-       <br/>
-       <hr/>
-       <Link to='/'>Go back</Link>    
+        { this.state.customer && this.state.customer.email }  |        
+        <br/>
+        <hr/>
+        <Link to='/'>Go back</Link>    
       </div>
     )
   }

@@ -5,10 +5,8 @@ import './App.css';
 import Customers from './components/Customers';
 import AddCustomer from './components/AddCustomer';
 import SingleCustomer from './components/SingleCustomer';
-
-
-
-
+import UpdateCustomer from './components/UpdateCustomer';
+import DeleteCustomer from './components/DeleteCustomer';
 
 class App extends Component {
   render() {
@@ -17,9 +15,10 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route path='/' exact component={Customers}/>
-            <Route path='/customer/:id' exact component={SingleCustomer} />  
             <Route path='/add' exact component={AddCustomer} />         
-                 
+            <Route path='/update/:id' exact component={UpdateCustomer} />  
+            <Route path='/customer/:id' exact component={SingleCustomer} />         
+            <Route path='/delete/:id' exact component={DeleteCustomer} />         
           </Switch>
         </BrowserRouter>
       </div>

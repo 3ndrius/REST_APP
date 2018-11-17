@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 export default class Customers extends Component {
     state = {
-        customers: null
+        customers: null,
+        flag:false
     }
     componentDidMount = () => {
         fetch('http://localhost:4000/customers')
@@ -14,16 +15,18 @@ export default class Customers extends Component {
         )    
     }
   render() {
-
+    if(this.state.flag) return <Redirect to='/' /> 
     return (
       <div>
-      
-       {this.state.customers && this.state.customers.map((person) => (
-            <Link to={'/customer/' + person._id} key={person._id}><div>{person.name} | {person.email} </div> </Link>
-            
-        ))
+       {
+           this.state.customers && this.state.customers.map((person) => (
+            <div key={person._id}> 
+                <Link to={'/customer/' + person._id}><div>{person.name} | {person.email} </div> </Link>
+                <Link to={'/update/' + person._id}> <button>Update</button> </Link>
+                <Link to={'/delete/' + person._id}> <button>Delete</button> </Link>
+            </div>  
+            ))
         }
-        
         <br/>
         <hr/>
        <h1>Add new Customers</h1>
