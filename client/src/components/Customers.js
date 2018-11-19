@@ -13,11 +13,18 @@ export default class Customers extends Component {
             customers:data
             })
         )    
+        console.log(localStorage.getItem("Item"));
     }
   render() {
     if(this.state.flag) return <Redirect to='/' /> 
     return (
       <div>
+          <div>
+              <Link to='/login'>Login</Link>
+              <Link to='register'>Register</Link>
+              <hr/>
+              <br/>
+          </div>
        {
            this.state.customers && this.state.customers.map((person) => (
             <div key={person._id}> 
