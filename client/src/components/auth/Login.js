@@ -26,6 +26,7 @@ export default class Login extends Component {
         .then(res => res.json())
         .then(res => {
             localStorage.setItem("Item", res.token);
+            localStorage.setItem("auth", res.exp);
             console.log("User looged in", res);  
             this.setState({
                 flag:true

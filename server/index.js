@@ -21,7 +21,7 @@ server.use(cors.actual);
 server.use(restify.plugins.bodyParser());
 
 // Protect Routes
-server.use(rjwt({ secret: config.JWT_SECRET }).unless({ path: ['/auth', '/customers'] }));
+server.use(rjwt({ secret: config.JWT_SECRET }).unless({ path: ['/auth', '/customers', '/register'] }));
 
 server.listen(config.PORT, () => {
   mongoose.set('useFindAndModify', false);

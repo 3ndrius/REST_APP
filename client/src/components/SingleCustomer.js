@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 export default class SingleCustomer extends Component {
     state = {
@@ -20,16 +20,16 @@ export default class SingleCustomer extends Component {
             this.setState({
             customer:data
             })
+          
         )    
     }
   render() {
+    console.log(localStorage.getItem("auth"));
     return (
       <div>
-        { this.state.customer && this.state.customer.name }   |      
-        { this.state.customer && this.state.customer.email }  |        
-        <br/>
-        <hr/>
-        <Link to='/'>Go back</Link>    
+        {localStorage.getItem("auth") ? <div><p>{this.state.customer.name}</p>  <p>{this.state.customer.email } </p>  <Link to='/'>Go back</Link>   </div>     
+       : <div>Unauthorized !! </div>
+    }   
       </div>
     )
   }
