@@ -5,8 +5,16 @@ export default class SingleCustomer extends Component {
         customer: '' 
     }
     componentDidMount = () => {
+
         const id = this.props.match.params.id;
-        fetch( `http://localhost:4000/customer/${id}`)
+        const jwt = localStorage.getItem("Item");
+      
+        let headers = {"Content-Type": "application/json"};
+        if (jwt) {
+          headers["Authorization"] = `jwt ${jwt}`;
+          console.log("Token: ", jwt);
+        }
+        fetch( `http://localhost:4000/customer/${id}`,{headers})
         .then(data => data.json())
         .then(data => 
             this.setState({
@@ -16,11 +24,14 @@ export default class SingleCustomer extends Component {
     }
     handleDelete = () =>{
         const id = this.props.match.params.id;
+        const jwt = localStorage.getItem("Item");
         fetch(`http://localhost:4000/customers/${id}`, {
             method: "delete",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `jwt ${jwt}`
             },
+            
             body: JSON.stringify({_id:id})
         })
         .then(res => res.text())

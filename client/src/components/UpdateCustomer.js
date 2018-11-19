@@ -8,7 +8,14 @@ export default class UpdateCustomer extends Component {
     }
     componentDidMount =() =>{
         const id = this.props.match.params.id;
-        fetch( `http://localhost:4000/customer/${id}`)
+        const jwt = localStorage.getItem("Item");
+      
+        let headers = {"Content-Type": "application/json"};
+        if (jwt) {
+          headers["Authorization"] = `jwt ${jwt}`;
+          console.log("Token: ", jwt);
+        }
+        fetch( `http://localhost:4000/customer/${id}`,{headers})
         .then(data => data.json())
         .then(data => 
             this.setState({
@@ -25,11 +32,16 @@ export default class UpdateCustomer extends Component {
     handleClick = (e) =>{
         e.preventDefault();
         const id = this.props.match.params.id;
+        const jwt = localStorage.getItem("Item");
+      
+        let headers = {"Content-Type": "application/json"};
+        if (jwt) {
+          headers["Authorization"] = `jwt ${jwt}`;
+          console.log("Token: ", jwt);
+        }
         fetch(`http://localhost:4000/customers/${id}`, {
             method: "put",
-            headers: {
-                "Content-Type": "application/json"
-            },
+          headers:headers,
             body: JSON.stringify(this.state)
         })
         .then(res => res)
