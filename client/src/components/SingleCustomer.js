@@ -7,7 +7,14 @@ export default class SingleCustomer extends Component {
     }
     componentDidMount = () => {
         const id = this.props.match.params.id;
-        fetch( `http://localhost:4000/customer/${id}`)
+        const jwt = localStorage.getItem("Item");
+      
+        let headers = {"Content-Type": "application/json"};
+        if (jwt) {
+          headers["Authorization"] = `jwt ${jwt}`;
+          console.log("Token: ", jwt);
+        }
+        fetch( `http://localhost:4000/customer/${id}`, {headers})
         .then(data => data.json())
         .then(data => 
             this.setState({
